@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://omcqli2dqdrh"]
+
+[ext_resource type="Script" path="res://Scripts/cannon.gd" id="1_d58o1"]
+[ext_resource type="Texture2D" uid="uid://gujo4oudvcyu" path="res://Sprites/Cannon.PNG" id="2_okliy"]
+[ext_resource type="Texture2D" uid="uid://506og05ya8ha" path="res://Sprites/DustandStuffPNG.PNG" id="3_0c2dt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_awb8o"]
+size = Vector2(89, 76.875)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_usm82"]
+atlas = ExtResource("3_0c2dt")
+region = Rect2(0, 0, 1000, 1000)
+
+[sub_resource type="Curve" id="Curve_3f8nx"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.529914, 0.102036), 0.0238686, 0.0238686, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="Cannon" type="Area2D"]
+modulate = Color(0.733005, 0.733005, 0.733005, 1)
+z_index = 1
+collision_mask = 257
+script = ExtResource("1_d58o1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.0913125, 0.0913125)
+texture = ExtResource("2_okliy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 6.4375)
+shape = SubResource("RectangleShape2D_awb8o")
+debug_color = Color(0, 0.270588, 0.701961, 0.419608)
+
+[node name="particles" type="CPUParticles2D" parent="."]
+self_modulate = Color(1.25, 1.25, 1.25, 1)
+position = Vector2(0, 4)
+scale = Vector2(0.2, 0.2)
+emitting = false
+amount = 10
+local_coords = true
+texture = SubResource("AtlasTexture_usm82")
+emission_shape = 2
+emission_sphere_radius = 128.0
+gravity = Vector2(0, 9.8)
+angular_velocity_min = -489.9
+angular_velocity_max = 415.67
+orbit_velocity_max = 0.2
+scale_amount_curve = SubResource("Curve_3f8nx")
+color = Color(1, 1, 1, 0.937255)
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

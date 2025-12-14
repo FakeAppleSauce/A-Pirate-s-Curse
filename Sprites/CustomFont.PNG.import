@@ -1,0 +1,25 @@
+[remap]
+
+importer="font_data_image"
+type="FontFile"
+uid="uid://cke3runaqkk60"
+path="res://.godot/imported/CustomFont.PNG-121e2aed80ee6b127a2f4daddb3b2990.fontdata"
+
+[deps]
+
+source_file="res://Sprites/CustomFont.PNG"
+dest_files=["res://.godot/imported/CustomFont.PNG-121e2aed80ee6b127a2f4daddb3b2990.fontdata"]
+
+[params]
+
+character_ranges=PackedStringArray("\'A\'", "\'B\'", "\'C\'", "\'D\'", "\'E\'", "\'F\'", "\'G\'", "\'H\'", "\'I\'", "\'J\'", "\'K\'", "\'L\'", "\'M\'", "\'N\'", "\'O\'", "\'P\'", "\'Q\'", "\'R\'", "\'S\'", "\'T\'", "\'U\'", "\'V\'", "\'W\'", "\'X\'", "\'Y\'", "\'Z\'", "\'a\'", "\'b\'", "\'c\'", "\'d\'", "\'e\'", "\'f\'", "\'g\'", "\'h\'", "\'i\'", "\'j\'", "\'k\'", "\'l\'", "\'m\'", "\'n\'", "\'o\'", "\'p\'", "\'q\'", "\'r\'", "\'s\'", "\'t\'", "\'u\'", "\'v\'", "\'w\'", "\'x\'", "\'y\'", "\'z\'", "\'.\'", "\',\'", "\'!\'", "\'?\'", "\'(\'", "\')\'", "\'\"\'", "\'\"\'", "\'\'\'", "\':\'", "\'*\'", "\' \'")
+kerning_pairs=PackedStringArray()
+columns=8
+rows=8
+image_margin=Rect2i(0, 0, 0, 0)
+character_margin=Rect2i(0, 0, 0, 0)
+ascent=0
+descent=0
+fallbacks=[]
+compress=true
+scaling_mode=2

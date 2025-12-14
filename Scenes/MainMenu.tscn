@@ -1,0 +1,168 @@
+[gd_scene load_steps=13 format=3 uid="uid://dvgj60d1ck3lg"]
+
+[ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_uk5sr"]
+[ext_resource type="FontFile" uid="uid://cke3runaqkk60" path="res://Sprites/CustomFont.PNG" id="1_ylwfp"]
+[ext_resource type="Texture2D" uid="uid://c6etlwi4wxkg6" path="res://Sprites/Food&Buttons.PNG" id="3_xfhik"]
+
+[sub_resource type="Theme" id="Theme_iukgq"]
+default_font = ExtResource("1_ylwfp")
+default_font_size = 17
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rl2fu"]
+atlas = ExtResource("3_xfhik")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_slrl1"]
+atlas = ExtResource("3_xfhik")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0yg6w"]
+atlas = ExtResource("3_xfhik")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dq3fo"]
+atlas = ExtResource("3_xfhik")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hm2ch"]
+atlas = ExtResource("3_xfhik")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_omxj7"]
+atlas = ExtResource("3_xfhik")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thf0f"]
+atlas = ExtResource("3_xfhik")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iocya"]
+atlas = ExtResource("3_xfhik")
+region = Rect2(256, 0, 256, 256)
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uk5sr")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -10.9772
+offset_top = -13.639
+offset_right = 1161.02
+offset_bottom = 699.361
+
+[node name="MainMenu" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="TextureButton" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 429.648
+offset_top = 369.174
+offset_right = 685.648
+offset_bottom = 625.174
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_iukgq")
+texture_normal = SubResource("AtlasTexture_rl2fu")
+texture_pressed = SubResource("AtlasTexture_slrl1")
+
+[node name="TextEdit" type="Label" parent="MainMenu"]
+layout_mode = 0
+offset_left = 438.45
+offset_top = 382.408
+offset_right = 945.45
+offset_bottom = 611.408
+theme_override_fonts/font = ExtResource("1_ylwfp")
+theme_override_font_sizes/font_size = 30
+text = "START GAME
+"
+
+[node name="CompleteMenu" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextEdit" type="Label" parent="CompleteMenu"]
+z_index = 3
+layout_mode = 0
+offset_left = 857.762
+offset_top = 259.157
+offset_right = 1364.76
+offset_bottom = 488.157
+theme_override_fonts/font = ExtResource("1_ylwfp")
+theme_override_font_sizes/font_size = 30
+text = "TREASURES
+"
+
+[node name="TextEdit2" type="Label" parent="CompleteMenu"]
+z_index = 3
+layout_mode = 0
+offset_left = 709.0
+offset_top = 405.0
+offset_right = 843.0
+offset_bottom = 459.0
+theme_override_fonts/font = ExtResource("1_ylwfp")
+theme_override_font_sizes/font_size = 30
+text = "QUIT
+"
+
+[node name="TextEdit3" type="Label" parent="CompleteMenu"]
+z_index = 3
+layout_mode = 0
+offset_left = 195.044
+offset_top = 399.109
+offset_right = 495.044
+offset_bottom = 465.109
+theme_override_fonts/font = ExtResource("1_ylwfp")
+theme_override_font_sizes/font_size = 30
+text = "NEXT RIDE
+"
+
+[node name="NextRideButton" type="TextureButton" parent="CompleteMenu"]
+layout_mode = 0
+offset_left = 190.307
+offset_top = 432.905
+offset_right = 446.307
+offset_bottom = 688.905
+texture_normal = SubResource("AtlasTexture_0yg6w")
+texture_pressed = SubResource("AtlasTexture_dq3fo")
+
+[node name="Quit" type="TextureButton" parent="CompleteMenu"]
+layout_mode = 0
+offset_left = 637.409
+offset_top = 425.814
+offset_right = 893.409
+offset_bottom = 681.814
+texture_normal = SubResource("AtlasTexture_hm2ch")
+texture_pressed = SubResource("AtlasTexture_omxj7")
+
+[node name="Treasures" type="TextureButton" parent="CompleteMenu"]
+layout_mode = 0
+offset_left = 886.197
+offset_top = -5.18947
+offset_right = 1142.2
+offset_bottom = 250.811
+texture_normal = SubResource("AtlasTexture_thf0f")
+texture_pressed = SubResource("AtlasTexture_iocya")
+
+[node name="Treasures" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="pressed" from="MainMenu/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CompleteMenu/NextRideButton" to="." method="_on_next_ride_button_pressed"]

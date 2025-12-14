@@ -1,0 +1,244 @@
+[gd_scene load_steps=16 format=3 uid="uid://ccmetbwu32ukh"]
+
+[ext_resource type="Script" path="res://Scripts/ui.gd" id="1_587nh"]
+[ext_resource type="Texture2D" uid="uid://cjxs242as4pc6" path="res://Sprites/HealthBar.PNG" id="2_mcab3"]
+[ext_resource type="Texture2D" uid="uid://pr7nieqvskpg" path="res://Sprites/TaskStuff.PNG" id="2_ojy3q"]
+[ext_resource type="FontFile" uid="uid://cke3runaqkk60" path="res://Sprites/CustomFont.PNG" id="2_wn2og"]
+[ext_resource type="Texture2D" uid="uid://506og05ya8ha" path="res://Sprites/DustandStuffPNG.PNG" id="3_gongv"]
+[ext_resource type="Script" path="res://Scripts/dust_bunnies.gd" id="3_halti"]
+[ext_resource type="Texture2D" uid="uid://c6etlwi4wxkg6" path="res://Sprites/Food&Buttons.PNG" id="7_80q7m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q2qld"]
+atlas = ExtResource("7_80q7m")
+region = Rect2(512, 413.75, 256, 98.25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0x063"]
+atlas = ExtResource("2_ojy3q")
+region = Rect2(256, 256, 256, 256)
+
+[sub_resource type="Gradient" id="Gradient_kgnwh"]
+offsets = PackedFloat32Array(0, 0.986348)
+colors = PackedColorArray(0.984314, 0.298039, 0, 1, 0.931293, 0.857174, 0.510923, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6loi"]
+atlas = ExtResource("2_mcab3")
+region = Rect2(0, 250, 1000, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dh85a"]
+atlas = ExtResource("2_mcab3")
+region = Rect2(0, 0, 1000, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g1iie"]
+atlas = ExtResource("2_mcab3")
+region = Rect2(0, 0, 1000, 250)
+
+[sub_resource type="FontVariation" id="FontVariation_3puws"]
+base_font = ExtResource("2_wn2og")
+spacing_glyph = -7
+spacing_space = -5
+spacing_top = -1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7lvdo"]
+atlas = ExtResource("3_gongv")
+region = Rect2(0, 1000, 1000, 1000)
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_587nh")
+
+[node name="Drawer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 493.0
+offset_top = 630.0
+offset_right = 533.0
+offset_bottom = 670.0
+
+[node name="Drawer Handle" type="TextureButton" parent="Drawer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.3805
+offset_top = -53.5335
+offset_right = 191.619
+offset_bottom = 46.4665
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = SubResource("AtlasTexture_q2qld")
+
+[node name="Drawer" type="ColorRect" parent="Drawer"]
+layout_mode = 0
+offset_left = -493.0
+offset_top = 51.0
+offset_right = 667.0
+offset_bottom = 169.0
+color = Color(0.560955, 0.560955, 0.560955, 1)
+
+[node name="TaskWindow" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TaskWindowBackground2" type="ColorRect" parent="TaskWindow"]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 49.0
+offset_right = 1098.0
+offset_bottom = 624.0
+color = Color(0, 0, 0, 1)
+
+[node name="TaskWindowBackground" type="ColorRect" parent="TaskWindow"]
+layout_mode = 0
+offset_left = 63.9886
+offset_top = 60.0057
+offset_right = 1088.99
+offset_bottom = 615.006
+color = Color(0.54983, 0.327125, 0.0903185, 1)
+
+[node name="TaskItems" type="Node2D" parent="TaskWindow"]
+z_index = 5
+
+[node name="DustBunny" type="TextureButton" parent="TaskWindow/TaskItems"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -754.402
+offset_top = -394.835
+offset_right = -498.402
+offset_bottom = -138.835
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+pivot_offset = Vector2(126, 126)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = SubResource("AtlasTexture_0x063")
+script = ExtResource("3_halti")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="TaskWindow/TaskItems"]
+position = Vector2(-248.244, -63.7161)
+amount = 30
+lifetime_randomness = 0.5
+gravity = Vector2(0, 200)
+orbit_velocity_min = -1.0
+orbit_velocity_max = 1.0
+scale_amount_min = 0.0
+scale_amount_max = 6.0
+color = Color(0.952941, 0.886275, 0, 1)
+color_ramp = SubResource("Gradient_kgnwh")
+
+[node name="HealthBar" type="Control" parent="."]
+custom_minimum_size = Vector2(1000, 250)
+layout_mode = 3
+anchor_left = -0.489
+anchor_top = -0.283
+anchor_right = -0.489
+anchor_bottom = -0.283
+offset_left = 583.328
+offset_top = 212.44
+offset_right = 1583.33
+offset_bottom = 462.44
+scale = Vector2(0.35, 0.35)
+
+[node name="DamageBar" type="TextureProgressBar" parent="HealthBar"]
+layout_mode = 0
+offset_left = -11.6033
+offset_top = -21.1358
+offset_right = 988.397
+offset_bottom = 228.864
+max_value = 69.0
+step = 0.5
+value = 69.0
+texture_under = SubResource("AtlasTexture_h6loi")
+texture_progress = SubResource("AtlasTexture_dh85a")
+tint_progress = Color(1, 0, 0, 1)
+
+[node name="ShipHealthBar" type="TextureProgressBar" parent="HealthBar"]
+layout_mode = 0
+offset_left = -12.931
+offset_top = -21.0
+offset_right = 987.069
+offset_bottom = 229.0
+max_value = 69.0
+value = 69.0
+texture_progress = SubResource("AtlasTexture_g1iie")
+
+[node name="UncText" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0.741176)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 487.673
+offset_top = -121.903
+offset_right = 527.673
+offset_bottom = -81.9025
+
+[node name="Outline" type="ColorRect" parent="UncText"]
+layout_mode = 0
+offset_left = 110.611
+offset_top = 161.769
+offset_right = 645.611
+offset_bottom = 275.769
+color = Color(0.10748, 0.10748, 0.10748, 1)
+
+[node name="InsideBox" type="ColorRect" parent="UncText"]
+modulate = Color(1, 1, 1, 0.823529)
+layout_mode = 0
+offset_left = 199.611
+offset_top = 165.769
+offset_right = 639.611
+offset_bottom = 268.769
+color = Color(0.601134, 0.383874, 0.317521, 1)
+
+[node name="uncText" type="Label" parent="UncText"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 180.611
+offset_top = 148.769
+offset_right = 616.611
+offset_bottom = 247.769
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = SubResource("FontVariation_3puws")
+theme_override_font_sizes/font_size = 20
+text = "(Press Spacebar To Talk To Bro)"
+autowrap_mode = 3
+max_lines_visible = 10
+
+[node name="Sprite2D" type="Sprite2D" parent="UncText"]
+position = Vector2(100.426, 222.329)
+scale = Vector2(0.200852, 0.200852)
+texture = SubResource("AtlasTexture_7lvdo")
+
+[node name="Points" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="number" type="Label" parent="Points"]
+layout_mode = 0
+offset_left = 32.9662
+offset_top = 109.86
+offset_right = 1140.97
+offset_bottom = 162.86
+theme_override_font_sizes/font_size = 31
+text = "0"
+
+[connection signal="button_down" from="Drawer/Drawer Handle" to="." method="_on_drawer_handle_button_down"]
+[connection signal="button_up" from="Drawer/Drawer Handle" to="." method="_on_drawer_handle_button_up"]
+[connection signal="pressed" from="Drawer/Drawer Handle" to="." method="_on_drawer_handle_pressed"]
+[connection signal="toggled" from="Drawer/Drawer Handle" to="." method="_on_drawer_handle_toggled"]
+[connection signal="button_down" from="TaskWindow/TaskItems/DustBunny" to="TaskWindow/TaskItems/DustBunny" method="_on_button_down"]
+[connection signal="button_up" from="TaskWindow/TaskItems/DustBunny" to="TaskWindow/TaskItems/DustBunny" method="_on_button_up"]
+[connection signal="pressed" from="TaskWindow/TaskItems/DustBunny" to="TaskWindow/TaskItems/DustBunny" method="_on_pressed"]

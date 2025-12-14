@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://ce1hpkaljyi0b"]
+
+[ext_resource type="Script" path="res://Scripts/barrel.gd" id="1_iqi7o"]
+[ext_resource type="Texture2D" uid="uid://pr7nieqvskpg" path="res://Sprites/TaskStuff.PNG" id="2_mvtcw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3uuhg"]
+atlas = ExtResource("2_mvtcw")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wxsq6"]
+atlas = ExtResource("2_mvtcw")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oeknr"]
+size = Vector2(12.5348, 14.1312)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c5xsy"]
+radius = 6.26801
+
+[node name="Barrel" type="Area2D"]
+modulate = Color(0.589096, 0.589096, 0.589096, 1)
+z_index = 2
+collision_layer = 5
+collision_mask = 257
+script = ExtResource("1_iqi7o")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-0.00037384, -0.0142703)
+scale = Vector2(0.0588383, 0.0588383)
+texture = SubResource("AtlasTexture_3uuhg")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(-0.0161762, 0.0109496)
+scale = Vector2(0.0585506, 0.0585506)
+texture = SubResource("AtlasTexture_wxsq6")
+
+[node name="SquareCollider" type="CollisionShape2D" parent="."]
+position = Vector2(0.0238581, 0.365648)
+shape = SubResource("RectangleShape2D_oeknr")
+debug_color = Color(0, 0.270588, 0.701961, 0.419608)
+
+[node name="CircleCollider" type="CollisionShape2D" parent="."]
+position = Vector2(-0.00870419, 1.29145)
+shape = SubResource("CircleShape2D_c5xsy")
+debug_color = Color(0, 0.270588, 0.701961, 0.419608)
+
+[node name="LeakingWater" type="CPUParticles2D" parent="."]
+z_index = 5
+position = Vector2(-0.137208, 0.772972)
+emitting = false
+amount = 15
+lifetime = 0.1
+explosiveness = 0.3
+emission_shape = 1
+emission_sphere_radius = 7.0
+scale_amount_min = 0.0
+scale_amount_max = 2.0
+color = Color(0, 0.644608, 0.645305, 1)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
