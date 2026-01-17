@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfh5pqxq5otxa"]
+
+[ext_resource type="Texture2D" uid="uid://pr7nieqvskpg" path="res://Sprites/TaskStuff.PNG" id="1_w0axy"]
+[ext_resource type="Script" path="res://Scripts/dust_bunnies.gd" id="2_2y54l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0x063"]
+atlas = ExtResource("1_w0axy")
+region = Rect2(256, 256, 256, 256)
+
+[node name="DustBunny" type="TextureButton"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -754.402
+offset_top = -394.835
+offset_right = -498.402
+offset_bottom = -138.835
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+pivot_offset = Vector2(126, 126)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = SubResource("AtlasTexture_0x063")
+script = ExtResource("2_2y54l")
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="button_up" from="." to="." method="_on_button_up"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

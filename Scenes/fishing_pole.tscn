@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://cib3ehr7605jj"]
+
+[ext_resource type="Script" path="res://Scripts/fishing_pole.gd" id="1_s33tw"]
+[ext_resource type="Texture2D" uid="uid://cyng5m4807axb" path="res://index.icon.png" id="1_t6oax"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u0eri"]
+radius = 5.29128
+
+[node name="fishingPole" type="RigidBody2D"]
+z_index = 5
+collision_layer = 257
+collision_mask = 257
+script = ExtResource("1_s33tw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.0971646, 0.133201)
+scale = Vector2(0.0134166, 0.0134166)
+texture = ExtResource("1_t6oax")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.247354, -0.131793)
+shape = SubResource("CircleShape2D_u0eri")
+debug_color = Color(0, 0.270588, 0.701961, 0.419608)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

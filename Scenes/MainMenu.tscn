@@ -57,6 +57,7 @@ offset_right = 1161.02
 offset_bottom = 699.361
 
 [node name="MainMenu" type="Control" parent="."]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -98,10 +99,10 @@ offset_bottom = 40.0
 [node name="TextEdit" type="Label" parent="CompleteMenu"]
 z_index = 3
 layout_mode = 0
-offset_left = 857.762
-offset_top = 259.157
-offset_right = 1364.76
-offset_bottom = 488.157
+offset_left = 858.0
+offset_top = 259.0
+offset_right = 1128.0
+offset_bottom = 289.0
 theme_override_fonts/font = ExtResource("1_ylwfp")
 theme_override_font_sizes/font_size = 30
 text = "TREASURES
@@ -151,18 +152,18 @@ texture_pressed = SubResource("AtlasTexture_omxj7")
 
 [node name="Treasures" type="TextureButton" parent="CompleteMenu"]
 layout_mode = 0
-offset_left = 886.197
-offset_top = -5.18947
-offset_right = 1142.2
-offset_bottom = 250.811
+offset_left = 865.325
+offset_top = 12.7007
+offset_right = 1121.33
+offset_bottom = 268.701
 texture_normal = SubResource("AtlasTexture_thf0f")
 texture_pressed = SubResource("AtlasTexture_iocya")
 
 [node name="Treasures" type="Control" parent="."]
-visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [connection signal="pressed" from="MainMenu/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="CompleteMenu/NextRideButton" to="." method="_on_next_ride_button_pressed"]
+[connection signal="pressed" from="CompleteMenu/Treasures" to="." method="_on_treasures_pressed"]

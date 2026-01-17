@@ -41,17 +41,26 @@ var drawerOpened = false
 @onready var task_window: Control = $TaskWindow
 
 @onready var task_items: Node2D = $TaskWindow/TaskItems
-@onready var dust_bunny: TextureButton = $TaskWindow/TaskItems/DustBunny
 @onready var task_window_background: ColorRect = $TaskWindow/TaskWindowBackground
+@onready var close_task_screen: TextureButton = $TaskWindow/CloseTaskScreen
+
 
 @onready var number: Label = $Points/number
 
 @onready var drawer_handle: TextureButton = $"Drawer/Drawer Handle"
 @onready var drawer: ColorRect = $Drawer/Drawer
+@onready var drawer_stuff: Control = $Drawer/DrawerStuff
+@onready var amountof_poles: Label = $Drawer/DrawerStuff/AmountofPoles
+
+
+const DUST_BUNNY = preload("res://Scenes/dust_bunny.tscn")
+
 
 
 func _ready() -> void:
 	init_health(Global.shipHealth)
+	
+	number.text = "0/" + str(neededPoints[Global.island])
 
 
 func _process(_delta: float) -> void:
@@ -93,13 +102,16 @@ func _process(_delta: float) -> void:
 			Global.cannonStatus[Global.currentTaskID] = "finished"
 			points += 40
 			
-		number.text = str(points)
+		number.text = str(points) + "/" + str(neededPoints[Global.island])
 		closeTaskScreen()
 		
 		
 	if points >= neededPoints[Global.island]:
 		get_tree().change_scene_to_file("res://Scenes/MainMenu.tscn")
 		Global.currentScreen = "completeMenu"
+		
+		
+	amountof_poles.text = str(Global.fishingPoles)
 
 
 #Health bar function
@@ -131,28 +143,31 @@ func setUpScreen():
 func closeTaskScreen():
 	task_window.visible = false
 	health_bar.visible = true
-	unc_control.visible = true
 	
 	Global.doingTask = false
+	get_tree().call_group("bunnies", "killCopy")
 
 
 func _on_barrel_open_barrel_task() -> void:
 	if Global.doingTask == false:
+		Global.task = "barrels"
 		setUpScreen()
 		task_window_background.color = Color(0.55, 0.33, 0.09, 1)
-		dust_bunny.spawnHoles()
-		task_items.visible = true
 		Global.dustLeft = 4
+		for i in range(4):
+			var button_instance = DUST_BUNNY.instantiate()
+			task_items.add_child(button_instance)
 
 
 func _on_cannon_cannon_task() -> void:
 	if Global.doingTask == false:
+		Global.task = "cannons"
 		setUpScreen()
 		task_window_background.color = Color(0.35, 0.35, 0.35, 1)
-		dust_bunny.spawnBunnies()
-		task_items.visible = true
 		Global.dustLeft = 7
-
+		for i in range(7):
+			var button_instance = DUST_BUNNY.instantiate()
+			task_items.add_child(button_instance)
 
 
 
@@ -162,7 +177,16 @@ func _on_drawer_handle_pressed() -> void:
 			drawer_handle.position.y -= 130
 			drawer.position.y = -68
 			drawerOpened = true
+			drawer_stuff.visible = true
 		elif drawerOpened == true:
 			drawer_handle.position.y += 130
 			drawer.position.y = 51
 			drawerOpened = false
+			drawer_stuff.visible = false
+
+
+
+func _on_close_task_screen_pressed() -> void:
+	closeTaskScreen()
+	print("d")
+	

@@ -2,19 +2,22 @@
 
 [ext_resource type="Script" path="res://Scripts/ui.gd" id="1_587nh"]
 [ext_resource type="Texture2D" uid="uid://cjxs242as4pc6" path="res://Sprites/HealthBar.PNG" id="2_mcab3"]
-[ext_resource type="Texture2D" uid="uid://pr7nieqvskpg" path="res://Sprites/TaskStuff.PNG" id="2_ojy3q"]
 [ext_resource type="FontFile" uid="uid://cke3runaqkk60" path="res://Sprites/CustomFont.PNG" id="2_wn2og"]
+[ext_resource type="Texture2D" uid="uid://cyng5m4807axb" path="res://index.icon.png" id="3_d4gop"]
 [ext_resource type="Texture2D" uid="uid://506og05ya8ha" path="res://Sprites/DustandStuffPNG.PNG" id="3_gongv"]
-[ext_resource type="Script" path="res://Scripts/dust_bunnies.gd" id="3_halti"]
 [ext_resource type="Texture2D" uid="uid://c6etlwi4wxkg6" path="res://Sprites/Food&Buttons.PNG" id="7_80q7m"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q2qld"]
 atlas = ExtResource("7_80q7m")
 region = Rect2(512, 413.75, 256, 98.25)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0x063"]
-atlas = ExtResource("2_ojy3q")
-region = Rect2(256, 256, 256, 256)
+[sub_resource type="AtlasTexture" id="AtlasTexture_khgsx"]
+atlas = ExtResource("7_80q7m")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_650k8"]
+atlas = ExtResource("7_80q7m")
+region = Rect2(256, 0, 256, 256)
 
 [sub_resource type="Gradient" id="Gradient_kgnwh"]
 offsets = PackedFloat32Array(0, 0.986348)
@@ -66,6 +69,7 @@ offset_right = 191.619
 offset_bottom = 46.4665
 grow_horizontal = 2
 grow_vertical = 2
+focus_mode = 0
 texture_normal = SubResource("AtlasTexture_q2qld")
 
 [node name="Drawer" type="ColorRect" parent="Drawer"]
@@ -75,6 +79,33 @@ offset_top = 51.0
 offset_right = 667.0
 offset_bottom = 169.0
 color = Color(0.560955, 0.560955, 0.560955, 1)
+
+[node name="DrawerStuff" type="Control" parent="Drawer"]
+visible = false
+anchors_preset = 0
+offset_left = -493.0
+offset_top = 51.0
+offset_right = -453.0
+offset_bottom = 91.0
+
+[node name="Poles" type="TextureRect" parent="Drawer/DrawerStuff"]
+layout_mode = 0
+offset_left = 956.663
+offset_top = -174.277
+offset_right = 1131.66
+offset_bottom = 0.722778
+texture = ExtResource("3_d4gop")
+expand_mode = 1
+
+[node name="AmountofPoles" type="Label" parent="Drawer/DrawerStuff"]
+layout_mode = 0
+offset_left = 1082.34
+offset_top = -46.9966
+offset_right = 1125.34
+offset_bottom = -4.99664
+theme_override_font_sizes/font_size = 30
+text = "0
+"
 
 [node name="TaskWindow" type="Control" parent="."]
 visible = false
@@ -99,29 +130,21 @@ offset_right = 1088.99
 offset_bottom = 615.006
 color = Color(0.54983, 0.327125, 0.0903185, 1)
 
+[node name="CloseTaskScreen" type="TextureButton" parent="TaskWindow"]
+layout_mode = 0
+offset_left = 1004.8
+offset_top = 20.0
+offset_right = 1260.8
+offset_bottom = 276.0
+scale = Vector2(0.5, 0.5)
+texture_normal = SubResource("AtlasTexture_khgsx")
+texture_pressed = SubResource("AtlasTexture_650k8")
+
 [node name="TaskItems" type="Node2D" parent="TaskWindow"]
 z_index = 5
 
-[node name="DustBunny" type="TextureButton" parent="TaskWindow/TaskItems"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -754.402
-offset_top = -394.835
-offset_right = -498.402
-offset_bottom = -138.835
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.6, 0.6)
-pivot_offset = Vector2(126, 126)
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture_normal = SubResource("AtlasTexture_0x063")
-script = ExtResource("3_halti")
-
 [node name="CPUParticles2D" type="CPUParticles2D" parent="TaskWindow/TaskItems"]
+z_index = 3
 position = Vector2(-248.244, -63.7161)
 amount = 30
 lifetime_randomness = 0.5
@@ -170,6 +193,7 @@ value = 69.0
 texture_progress = SubResource("AtlasTexture_g1iie")
 
 [node name="UncText" type="Control" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.741176)
 layout_mode = 3
 anchors_preset = 0
@@ -239,6 +263,4 @@ text = "0"
 [connection signal="button_up" from="Drawer/Drawer Handle" to="." method="_on_drawer_handle_button_up"]
 [connection signal="pressed" from="Drawer/Drawer Handle" to="." method="_on_drawer_handle_pressed"]
 [connection signal="toggled" from="Drawer/Drawer Handle" to="." method="_on_drawer_handle_toggled"]
-[connection signal="button_down" from="TaskWindow/TaskItems/DustBunny" to="TaskWindow/TaskItems/DustBunny" method="_on_button_down"]
-[connection signal="button_up" from="TaskWindow/TaskItems/DustBunny" to="TaskWindow/TaskItems/DustBunny" method="_on_button_up"]
-[connection signal="pressed" from="TaskWindow/TaskItems/DustBunny" to="TaskWindow/TaskItems/DustBunny" method="_on_pressed"]
+[connection signal="pressed" from="TaskWindow/CloseTaskScreen" to="." method="_on_close_task_screen_pressed"]

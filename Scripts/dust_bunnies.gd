@@ -13,9 +13,14 @@ var holePressed = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if Global.firstDust == false:
-		position = Vector2(randi_range(7, 883), randi_range(12, 407))
-		rotation = randi_range(0,360)
+	add_to_group("bunnies")
+	
+	position = Vector2(randi_range(7, 883), randi_range(12, 407))
+	rotation = randi_range(0,360)
+	if Global.task == "barrels":
+		atlas_texture.region = Rect2(0, 256, 256, 256)
+	elif Global.task == "cannons":
+		atlas_texture.region = Rect2(256, 256, 256, 256)
 
 
 
@@ -36,31 +41,6 @@ func _process(_delta: float) -> void:
 		cpu_particles_2d.emitting = false
 
 
-func spawnBunnies():
-	Global.firstDust = false
-	Global.task = "cannons"
-	atlas_texture.region = Rect2(256, 256, 256, 256)
-	
-	add_sibling(duplicate())
-	add_sibling(duplicate())
-	add_sibling(duplicate())
-	add_sibling(duplicate())
-	add_sibling(duplicate())
-	add_sibling(duplicate())
-	add_sibling(duplicate())
-
-
-func spawnHoles():
-	Global.firstDust = false
-	Global.task = "barrels"
-	atlas_texture.region = Rect2(0, 256, 256, 256)
-	
-	add_sibling(dust_bunnies.duplicate())
-	add_sibling(dust_bunnies.duplicate())
-	add_sibling(dust_bunnies.duplicate())
-	add_sibling(dust_bunnies.duplicate())
-
-
 func _on_pressed() -> void:
 	if Global.task == "cannons":
 		queue_free()
@@ -79,3 +59,7 @@ func _on_button_up() -> void:
 	if Global.task == "barrels":
 		cpu_particles_2d.emitting = false
 		holePressed = false
+
+func killCopy():
+	print("d")
+	queue_free()

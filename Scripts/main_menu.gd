@@ -32,3 +32,9 @@ func _on_next_ride_button_pressed() -> void:
 	Global.island += 1
 	Global.firstDust = true
 	get_tree().change_scene_to_file("res://Scenes/MainGame.tscn")
+
+
+func _on_treasures_pressed() -> void:
+	treasures.visible = true
+	main_menu.visible = false
+	complete_menu.visible = false

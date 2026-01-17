@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+const FISHING_POLE = preload("res://Scenes/fishing_pole.tscn")
 
 @onready var player = $Idle
 @onready var skeleton = $Skeleton2D
@@ -10,6 +11,7 @@ extends CharacterBody2D
 
 @onready var world_environment: WorldEnvironment = $"../WorldEnvironment"
 
+@onready var fishing: Node = $"../Fishing"
 
 
 const SPEED = 100.0
@@ -18,6 +20,8 @@ var isJumping = false
 var onLadder = false
 var temp = false
 var distanceToFloor = 0
+
+var fishable = false
 
 
 func _ready() -> void:
@@ -41,6 +45,13 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("Jump") and onLadder == true && Global.doingTask == false:
 		velocity.y = JUMP_VELOCITY/2
 		
+		
+	if Input.is_action_just_pressed("Fish") and fishable == true:
+		if Global.fishingPoles > 0:
+			var fishing_pole = FISHING_POLE.instantiate()
+			fishing_pole.position = position
+			fishing.add_child(fishing_pole)
+			Global.fishingPoles -= 1
 		
 		
 	# Get the input direction and handle the movement/deceleration.
@@ -75,9 +86,12 @@ func _process(_delta: float) -> void:
 	if velocity == Vector2(0,0) && isJumping == false:
 		animation_player.current_animation = "Idle"
 
+
+
 func jump():
 	await get_tree().create_timer(0.65).timeout
 	isJumping = false
+
 
 func shakeCamera():
 	camera_2d.offset = Vector2(randi_range(-3,3), randi_range(-3,3))
@@ -85,3 +99,17 @@ func shakeCamera():
 	camera_2d.offset = Vector2(randi_range(-3,3), randi_range(-3,3))
 	await get_tree().create_timer(0.1).timeout
 	camera_2d.offset = Vector2(0,0)
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	fishable = true
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.name == "Character":
+		fishable = true
+
+
+func _on_area_2d_body_exited(body: Node2D) -> void:
+	if body.name == "Character":
+		fishable = false
