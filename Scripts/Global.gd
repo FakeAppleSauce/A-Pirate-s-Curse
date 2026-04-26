@@ -26,7 +26,7 @@ var barrelStatus = ["timedOut", "timedOut", "timedOut", "timedOut", "timedOut", 
 var cannonStatus = ["timedOut", "timedOut", "timedOut", "timedOut", "timedOut", "timedOut"]
 
 var fishingPoles = 1000
-var treasuresHolding = 100
+var treasuresHolding = 0
 var treasureList = [
 	{"name": "Doubloons", "description": "AAAA", "ability": "AA", "location": Rect2(0,0,1000,1000)}, #0 
 	{"name": "Rum", "description": "AAAA", "ability": "AA", "location": Rect2(1000,0,1000,1000)}, #1

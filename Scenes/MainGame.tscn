@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://dys7mlm34gcl3"]
+[gd_scene load_steps=33 format=4 uid="uid://dys7mlm34gcl3"]
 
 [ext_resource type="Texture2D" uid="uid://c4p17s5v6ujei" path="res://Sprites/ShipParts.PNG" id="1_uj6mt"]
 [ext_resource type="Script" path="res://Scripts/ladder_collision.gd" id="2_xstu7"]
@@ -10,32 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://dy6u25vw857b5" path="res://Sprites/Sky.PNG" id="9_yo5bj"]
 [ext_resource type="Texture2D" uid="uid://mss2pp6lvfgs" path="res://Sprites/Clouds.PNG" id="10_c51ib"]
 [ext_resource type="PackedScene" uid="uid://bxojbkufss5dm" path="res://Scenes/booger.tscn" id="11_flknr"]
-
-[sub_resource type="Environment" id="Environment_qucbl"]
-background_mode = 3
-background_color = Color(0.13037, 0.144533, 0.616796, 1)
-ambient_light_source = 1
-ambient_light_color = Color(0.624509, 0.600386, 0.0285562, 0.690196)
-ambient_light_energy = 11.4
-tonemap_mode = 2
-ssr_fade_in = 0.00618518
-ssr_fade_out = 4.92458
-glow_enabled = true
-glow_levels/1 = 5.06
-glow_levels/5 = 0.83
-glow_levels/6 = 0.78
-glow_levels/7 = 0.09
-glow_intensity = 1.32
-glow_strength = 1.08
-glow_blend_mode = 1
-glow_hdr_threshold = 0.21
-fog_sun_scatter = 0.19
-fog_density = 0.5638
-fog_height = 165.16
-fog_height_density = 3.7849
-adjustment_enabled = true
-adjustment_brightness = 0.7
-adjustment_saturation = 1.43
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2hsgh"]
 texture = ExtResource("1_uj6mt")
@@ -197,7 +171,6 @@ size = Vector2(89.3553, 9.99844)
 position = Vector2(-1, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_qucbl")
 
 [node name="TileMaps" type="Node" parent="."]
 

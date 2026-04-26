@@ -28,7 +28,7 @@ var damage_values = 0
 var duplicated_node = 3
 
 var points = 0
-var neededPoints = [20, 250, 500, 1000, 1500, 2500, 2000, 5000, 8000, 15000, 25000, 20000, 50000, 70000, 100000, 150000, 125000]
+var neededPoints = [250, 500, 1000, 1500, 2500, 2000, 5000, 8000, 15000, 25000, 20000, 50000, 70000, 100000, 150000, 125000]
 
 var drawerOpened = false
 
