@@ -1,11 +1,26 @@
-[gd_scene load_steps=7 format=3 uid="uid://ce1hpkaljyi0b"]
+[gd_scene load_steps=10 format=3 uid="uid://ce1hpkaljyi0b"]
 
 [ext_resource type="Script" path="res://Scripts/barrel.gd" id="1_iqi7o"]
 [ext_resource type="Texture2D" uid="uid://pr7nieqvskpg" path="res://Sprites/TaskStuff.PNG" id="2_mvtcw"]
+[ext_resource type="Shader" path="res://Scenes/barrel.gdshader" id="2_n0tci"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x5opd"]
+resource_local_to_scene = true
+shader = ExtResource("2_n0tci")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_thickness = 15.0
+shader_parameter/active = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3uuhg"]
 atlas = ExtResource("2_mvtcw")
 region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hpnx4"]
+resource_local_to_scene = true
+shader = ExtResource("2_n0tci")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_thickness = 15.0
+shader_parameter/active = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wxsq6"]
 atlas = ExtResource("2_mvtcw")
@@ -25,11 +40,13 @@ collision_mask = 257
 script = ExtResource("1_iqi7o")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_x5opd")
 position = Vector2(-0.00037384, -0.0142703)
 scale = Vector2(0.0588383, 0.0588383)
 texture = SubResource("AtlasTexture_3uuhg")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_hpnx4")
 position = Vector2(-0.0161762, 0.0109496)
 scale = Vector2(0.0585506, 0.0585506)
 texture = SubResource("AtlasTexture_wxsq6")
@@ -57,10 +74,18 @@ scale_amount_min = 0.0
 scale_amount_max = 2.0
 color = Color(0, 0.644608, 0.645305, 1)
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 10.0
+[node name="CompletionParticles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 10
+lifetime = 0.5
 one_shot = true
+spread = 180.0
+gravity = Vector2(0, 100)
+initial_velocity_max = 250.0
+angular_velocity_max = 355.79
+scale_amount_min = 3.0
+scale_amount_max = 6.0
+color = Color(0.61589, 0.581329, 0.140253, 1)
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

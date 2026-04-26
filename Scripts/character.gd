@@ -27,6 +27,9 @@ var fishable = false
 func _ready() -> void:
 	position.x = Global.playerpositionX
 	position.y = Global.playerpositionY
+	await get_tree().create_timer(5).timeout
+	Global.startTasks()
+	
 
 
 func _physics_process(delta: float) -> void:
@@ -75,16 +78,24 @@ func _process(_delta: float) -> void:
 	if Input.is_action_pressed("moveRight"):
 		skeleton.scale.x = -1
 		animation_player.play("Running")
+		if camera_2d.offset.x != 40:
+			await get_tree().create_timer(0.05).timeout
+			camera_2d.offset.x = move_toward(camera_2d.offset.x, 20, 1)
 		
 	
 	if Input.is_action_pressed("moveLeft"):
 		skeleton.scale.x = 1
 		animation_player.play("Running_2")
+		if camera_2d.offset.x != -40:
+			await get_tree().create_timer(0.05).timeout
+			camera_2d.offset.x = move_toward(camera_2d.offset.x, -20, 1)
 		
 
 		
 	if velocity == Vector2(0,0) && isJumping == false:
 		animation_player.current_animation = "Idle"
+		await get_tree().create_timer(0.1).timeout
+		camera_2d.offset.x = move_toward(camera_2d.offset.x, 0, 2)
 
 
 
@@ -94,14 +105,18 @@ func jump():
 
 
 func shakeCamera():
-	camera_2d.offset = Vector2(randi_range(-3,3), randi_range(-3,3))
-	await get_tree().create_timer(0.1).timeout
-	camera_2d.offset = Vector2(randi_range(-3,3), randi_range(-3,3))
-	await get_tree().create_timer(0.1).timeout
-	camera_2d.offset = Vector2(0,0)
+	pass
+	#camera_2d.drag_horizontal_offset = randf_range(-0.1,0.1)
+	#await get_tree().create_timer(0.1).timeout
+	#camera_2d.drag_horizontal_offset = randf_range(-0.1,0.1)
+	#await get_tree().create_timer(0.1).timeout
+	#camera_2d.drag_horizontal_offset = randf_range(-0.1,0.1)
+	#await get_tree().create_timer(0.1).timeout
+	#camera_2d.drag_horizontal_offset = 0
+	
 
 
-func _on_area_2d_area_entered(area: Area2D) -> void:
+func _on_area_2d_area_entered(_area: Area2D) -> void:
 	fishable = true
 
 

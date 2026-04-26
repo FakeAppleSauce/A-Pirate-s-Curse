@@ -1283,6 +1283,12 @@ shape = SubResource("CapsuleShape2D_r8qa3")
 debug_color = Color(0.590221, 0.546281, 0.104569, 0.42)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-11, 7)
+position = Vector2(3, 6)
 zoom = Vector2(4.5, 4.5)
 position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+drag_vertical_enabled = true
+drag_top_margin = 0.05
+drag_bottom_margin = 0.05
+editor_draw_limits = true
+editor_draw_drag_margin = true

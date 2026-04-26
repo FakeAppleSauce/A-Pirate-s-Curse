@@ -61,5 +61,4 @@ func _on_button_up() -> void:
 		holePressed = false
 
 func killCopy():
-	print("d")
 	queue_free()

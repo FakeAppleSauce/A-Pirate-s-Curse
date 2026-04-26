@@ -3,17 +3,24 @@ extends Area2D
 @onready var character: CharacterBody2D = $"../../Character"
 @onready var timer: Timer = $Timer
 @onready var particles: CPUParticles2D = $particles
+@onready var ui: CanvasLayer = $"../../UI"
+@onready var completion_particles: CPUParticles2D = $CompletionParticles
+@onready var sprite_2d: Sprite2D = $Sprite2D
 
 
 var canDoTask = false
 var dirty = false
+var cooldown = false
 
 @export var instance: int = 0
 
-signal cannonTask
+
+signal cannonTask()
+
 
 func _ready() -> void:
-	timeCycle()
+	Global.newTask.connect(_on_new_task)
+	ui.taskFinished.connect(_on_task_finished)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -24,37 +31,67 @@ func _process(_delta: float) -> void:
 		Global.currentTaskID = instance
 		Global.cannonStatus[instance] = "workingOnIt"
 		
-	if Global.cannonStatus[instance] == "finished":
-		dirty = false
-		particles.emitting = false
-		modulate = Color(0.8, 0.8, 0.8, 1)
-		timeCycle()
-		Global.barrelStatus[instance] = "neutral"
 		
 	
 
 
 func callTask():
-	emit_signal("cannonTask")
+	cannonTask.emit()
 
 
 
 func _on_body_entered(body: Node2D) -> void:
 	if body == character:
 		canDoTask = true
+		if particles.emitting == true:
+			var mat = sprite_2d.material as ShaderMaterial
+			mat.set_shader_parameter("active", true)
 
 func _on_body_exited(body: Node2D) -> void:
 	if body == character:
 		canDoTask = false
+		var mat = sprite_2d.material as ShaderMaterial
+		mat.set_shader_parameter("active", false)
 
 
-func timeCycle():
-	await get_tree().create_timer(3).timeout
-	timer.wait_time = randi_range(10,30)
-	timer.start()
-	Global.cannonStatus[instance] = "countingDown"
-	await timer.timeout
-	dirty = true
-	Global.cannonStatus[instance] = "dirty"
-	particles.emitting = true
-	modulate = Color(1, 1, 1, 1)
+
+func startDamaging():
+	await get_tree().create_timer(1.5).timeout
+	if Global.cannonStatus[instance] == "dirty":
+		Global.shipHealth -= 0.75
+		ui.set_health(Global.shipHealth)
+		character.shakeCamera()
+		ui.screenEffect()
+		startDamaging()
+
+
+func _on_task_finished(task, ID):
+	if task == "cannon" && ID == instance:
+		particles.emitting = false
+		completion_particles.emitting = true
+		modulate = Color(0.8, 0.8, 0.8, 1)
+		dirty = false
+		var mat = sprite_2d.material as ShaderMaterial
+		mat.set_shader_parameter("active", false)
+		Global.barrelStatus[instance] = "neutral"
+		cooldown = true
+		await get_tree().create_timer(2).timeout
+		cooldown = false
+
+
+func _on_new_task(task, id):
+	if task == "cannon" and id == instance:
+		if dirty == false && cooldown == false:
+			dirty = true
+			Global.cannonStatus[instance] = "dirty"
+			particles.emitting = true
+			modulate = Color(1, 1, 1, 1)
+			if canDoTask == true:
+				var mat = sprite_2d.material as ShaderMaterial
+				mat.set_shader_parameter("active", true)
+			
+			Global.taskAmountPerRound += 1
+			Global.startTasks()
+			startDamaging()
+		else:
+			Global.startTasks()

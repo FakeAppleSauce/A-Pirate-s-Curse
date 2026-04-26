@@ -28,7 +28,7 @@ var damage_values = 0
 var duplicated_node = 3
 
 var points = 0
-var neededPoints = [500, 1000, 1500, 2500, 2000, 5000, 8000, 15000, 25000, 20000, 50000, 70000, 100000, 150000, 125000]
+var neededPoints = [20, 250, 500, 1000, 1500, 2500, 2000, 5000, 8000, 15000, 25000, 20000, 50000, 70000, 100000, 150000, 125000]
 
 var drawerOpened = false
 
@@ -52,10 +52,14 @@ var drawerOpened = false
 @onready var drawer_stuff: Control = $Drawer/DrawerStuff
 @onready var amountof_poles: Label = $Drawer/DrawerStuff/AmountofPoles
 
+@onready var damage_overlay: ColorRect = $DamageOverlay
 
+
+#preloads
 const DUST_BUNNY = preload("res://Scenes/dust_bunny.tscn")
 
-
+#signals
+signal taskFinished(task, ID)
 
 func _ready() -> void:
 	init_health(Global.shipHealth)
@@ -94,15 +98,20 @@ func _process(_delta: float) -> void:
 			
 #Task Code
 	if Global.dustLeft == 0:
-		Global.dustLeft = -1
 		if Global.task == "barrels":
-			Global.barrelStatus[Global.currentTaskID] = "finished"
+			taskFinished.emit("barrel", Global.currentTaskID)
 			points += 30
-		elif Global.task == "cannons":
-			Global.cannonStatus[Global.currentTaskID] = "finished"
-			points += 40
+			Global.taskAmountPerRound -= 1
 			
+		elif Global.task == "cannons":
+			taskFinished.emit("cannon", Global.currentTaskID)
+			points += 40
+			Global.taskAmountPerRound -= 1
+			
+		Global.dustLeft = -1
+		
 		number.text = str(points) + "/" + str(neededPoints[Global.island])
+		Global.currentTaskID = -1
 		closeTaskScreen()
 		
 		
@@ -188,5 +197,17 @@ func _on_drawer_handle_pressed() -> void:
 
 func _on_close_task_screen_pressed() -> void:
 	closeTaskScreen()
-	print("d")
 	
+	
+#var screenBlinking = false
+func screenEffect():
+	pass
+	"""
+	if screenBlinking == false:
+		screenBlinking = true
+		damage_overlay.self_modulate.a = move_toward(0, 0.5, 0.01)
+		print(damage_overlay.self_modulate.a)
+		await get_tree().create_timer(0.5).timeout
+		damage_overlay.self_modulate.a = move_toward(0.5, 0, 0.01)
+		screenBlinking = false
+	"""

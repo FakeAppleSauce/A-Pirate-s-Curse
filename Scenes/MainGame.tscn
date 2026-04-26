@@ -13,7 +13,7 @@
 
 [sub_resource type="Environment" id="Environment_qucbl"]
 background_mode = 3
-background_color = Color(0.179979, 0.201965, 0.788862, 1)
+background_color = Color(0.13037, 0.144533, 0.616796, 1)
 ambient_light_source = 1
 ambient_light_color = Color(0.624509, 0.600386, 0.0285562, 0.690196)
 ambient_light_energy = 11.4
@@ -194,6 +194,7 @@ size = Vector2(179.718, 10.5503)
 size = Vector2(89.3553, 9.99844)
 
 [node name="Node2D" type="Node2D"]
+position = Vector2(-1, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_qucbl")
@@ -305,27 +306,27 @@ instance = 5
 position = Vector2(425.922, 222.56)
 
 [node name="Barrel2" parent="Barrels" groups=["barrels"] instance=ExtResource("6_k381j")]
-position = Vector2(505.486, 222.354)
+position = Vector2(439.46, 222.614)
 instance = 1
 
 [node name="Barrel3" parent="Barrels" groups=["barrels"] instance=ExtResource("6_k381j")]
-position = Vector2(492.308, 222.366)
+position = Vector2(452.395, 222.383)
 instance = 2
 
 [node name="Barrel4" parent="Barrels" groups=["barrels"] instance=ExtResource("6_k381j")]
-position = Vector2(479.117, 222.385)
+position = Vector2(465.271, 222.558)
 instance = 3
 
 [node name="Barrel5" parent="Barrels" groups=["barrels"] instance=ExtResource("6_k381j")]
-position = Vector2(466.029, 222.445)
+position = Vector2(478.49, 222.532)
 instance = 4
 
 [node name="Barrel6" parent="Barrels" groups=["barrels"] instance=ExtResource("6_k381j")]
-position = Vector2(452.604, 222.448)
+position = Vector2(492.323, 222.448)
 instance = 5
 
 [node name="Barrel7" parent="Barrels" groups=["barrels"] instance=ExtResource("6_k381j")]
-position = Vector2(439.287, 222.446)
+position = Vector2(505.156, 222.405)
 instance = 6
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -395,7 +396,7 @@ metadata/_edit_lock_ = true
 [node name="UI" parent="." instance=ExtResource("9_qgu6b")]
 
 [node name="Booger" parent="." instance=ExtResource("11_flknr")]
-position = Vector2(191.844, 215.001)
+position = Vector2(53.4049, 30.4735)
 scale = Vector2(0.1, 0.1)
 
 [node name="Lights" type="Node2D" parent="."]
@@ -523,6 +524,7 @@ debug_color = Color(0.436404, 0.596953, 0.168259, 0.42)
 [connection signal="body_entered" from="Barrels/Barrel5" to="Character" method="_on_barrel_5_body_entered"]
 [connection signal="body_entered" from="Barrels/Barrel6" to="Character" method="_on_barrel_6_body_entered"]
 [connection signal="body_entered" from="Barrels/Barrel7" to="Character" method="_on_barrel_7_body_entered"]
+[connection signal="taskFinished" from="UI" to="Barrels/Barrel" method="_on_ui_task_finished"]
 [connection signal="area_entered" from="Fishing/fishingArea" to="Character" method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Fishing/fishingArea" to="Character" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Fishing/fishingArea" to="Character" method="_on_area_2d_body_exited"]

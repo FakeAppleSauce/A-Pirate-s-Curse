@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://bfh2231tdp6nl"]
+
+[ext_resource type="Script" path="res://Scripts/new_item_square.gd" id="1_b8q2l"]
+[ext_resource type="Texture2D" uid="uid://7w66e31kvr8o" path="res://Sprites/Treasures.PNG" id="2_krjwq"]
+
+[sub_resource type="Gradient" id="Gradient_w2jbe"]
+offsets = PackedFloat32Array(0, 0.0199336)
+colors = PackedColorArray(0, 0, 0, 1, 0.570744, 0.296817, 0.0711516, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_614rn"]
+gradient = SubResource("Gradient_w2jbe")
+width = 60
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_okodp"]
+resource_local_to_scene = true
+atlas = ExtResource("2_krjwq")
+region = Rect2(1000, 1000, 1000, 1000)
+
+[node name="newItemSquare" type="Control"]
+custom_minimum_size = Vector2(81, 115)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1.48499
+offset_top = -1.13428
+offset_right = 84.485
+offset_bottom = 93.8657
+script = ExtResource("1_b8q2l")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+offset_left = -1.62653
+offset_top = -2.27502
+offset_right = 73.3735
+offset_bottom = 97.725
+texture = SubResource("GradientTexture1D_614rn")
+expand_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(35.3804, 48.5831)
+scale = Vector2(0.0667646, 0.0667646)
+texture = SubResource("AtlasTexture_okodp")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 73.0
+offset_bottom = 98.0
+flat = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
